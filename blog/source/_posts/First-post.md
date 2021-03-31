@@ -1,7 +1,12 @@
 title: First post
 author: Abdulrahman Sakah
-date: 2021-03-31 22:53:59
 tags:
+  - abod
+  - hej
+  - test
+categories:
+  - abod
+date: 2021-03-31 22:53:00
 ---
 This is my first post and here i am still learning about my website and how it works
 
