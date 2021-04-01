@@ -81,6 +81,9 @@ tag_map:
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
 meta_generator: true
 
+metadata:
+  index_img: path/to/default/image.jpg
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
@@ -104,7 +107,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: blog
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
