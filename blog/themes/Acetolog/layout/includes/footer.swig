@@ -11,10 +11,10 @@
     {% endif %}
 
     <div class="al_index_footer_item al_index_footer_extra">
-        Created By 
-        <a href="https://github.com/iGuan7u/Acetolog">AcetoLog</a>
-         · Power By 
-        <a href="https://hexo.io/">Hexo</a>
+        Created with ❤️ By 
+        <a href="http://abodsakka.xyz">Abdulrahman Sakah</a>
+         on 
+        <a href="https://www.wikiwand.com/en/Earth">Earth</a>
     </div>
 
     <div class="al_index_footer_item al_index_footer_extra_right">
