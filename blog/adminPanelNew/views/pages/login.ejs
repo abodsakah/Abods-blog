@@ -1,0 +1,67 @@
+<%- include("../addons/head"), {title:title} %> 
+
+<div uk-sticky="media: 960" class="uk-navbar-container tm-navbar-container uk-sticky uk-active" style="position: fixed; top: 0px; width: 1903px;">
+    <div class="uk-container uk-container-expand">
+        <nav uk-navbar>
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo">
+                    Abod's <span style="font-family: 'Pacifico', cursive;"> Blog</span></a>
+                </a>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="content-background">
+    <div class="uk-section-large">
+        <div class="uk-container uk-container-large">
+            <div uk-grid class="uk-child-width-1-1@s uk-child-width-2-3@l">
+                <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
+                <div class="uk-width-1-1@s uk-width-3-5@l uk-width-1-3@xl">
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-body">
+                            <center>
+                                <h2>Abod's <span style="font-family: 'Pacifico', cursive;"> Blog</span> <br><br> Admin Login</h2><br />
+                            </center>
+                            <% if(loginErrors.length > 0) {
+                                for(var error of loginErrors){%>
+                                    <div class="uk-alert-danger" uk-alert>
+                                        <a class="uk-alert-close" uk-close></a>
+                                        <p><%= error %></p>
+                                    </div> 
+                                <% }} %>
+                            <form method="POST">
+                                <fieldset class="uk-fieldset">
+
+                                    <div class="uk-margin">
+                                        <div class="uk-position-relative">
+                                            <span class="uk-form-icon ion-android-person"></span>
+                                            <input name="user" class="uk-input" type="email" placeholder="example@domain.com">
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-margin">
+                                        <div class="uk-position-relative">
+                                            <span class="uk-form-icon ion-locked"></span>
+                                            <input name="pass" class="uk-input" type="password" placeholder="Password">
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-margin">
+                                        <button type="submit" class="uk-button uk-button-primary" style="width:100%;">
+                                            <span class="ion-forward"></span>&nbsp; Login
+                                        </button>
+                                    </div>
+
+                                    <hr />
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../addons/footer") %> 

@@ -5,3 +5,6 @@ db.json
 node_modules/
 public/
 .deploy*/
+./node_modules
+./config/dbConfig.json
+./adminPanelNew/conf/db/dbConfig.json

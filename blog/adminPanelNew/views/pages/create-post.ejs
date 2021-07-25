@@ -1,0 +1,68 @@
+<%- include("../addons/head"), {title:title} %> 
+<%- include("../addons/nav") %> 
+<div class="uk-section-small">
+    <div class="uk-container uk-container-meduim">
+        <form method="POST">
+                <legend class="uk-legend">Create new post</legend>
+                <h2>Header image link</h2>
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="https://domain.com/image" value="" name="headerImage">
+                </div>
+
+                <h2>Title</h2>
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Input" value="" name="title">
+                </div>
+
+                <div class="uk-column-1-2">
+                    <div>
+                        <h2 class="">Tags</h2>
+                        <input class ="uk-input" type="text" name="tags" placeholder="tag1, tag2, tag3" value="">
+                    </div>
+                    <div>
+                        <h2 class="">Status</h2>
+                        <div class="">
+                            <select class="uk-select" name="status">
+                                <option value="1">Public</option>
+                                <option value="2">Private</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        
+
+                <h2>Post Meta</h2>
+                <input class ="uk-input" type="text" name="postMeta" placeholder="A shortdescription of the post" value="">
+
+                <h2>Main body</h2>
+                <textarea id="bodyContent" name="bodyContent" style="height: 800px;">
+                    
+                </textarea>
+
+                
+
+                <button class="uk-button uk-button-default" style="float: right; width: 100%">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Initialize Quill editor -->
+<script src='https://cdn.tiny.cloud/1/s6hsy5kv7b8q35vpwwux25j3xuxargmohkpjopuikjp4vehf/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+<script>
+  tinymce.init({
+    selector: '#bodyContent',
+    //directionality
+    plugins: 'codesample image   lists anchor anchor autolink code charmap advlist emoticons    link media preview toc wordcount',
+    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify ltr rtl | bullist  numlist outdent indent link charmap| codesample image imagetools emoticons media | toc | preview wordcount code',
+    toolbar_mode: 'sliding',
+    convert_newlines_to_brs : true,
+    force_br_newlines : true,
+    force_p_newlines : true,
+    forced_root_block : false,
+});
+
+  
+</script>
+
+<%- include("../addons/footer") %> 
