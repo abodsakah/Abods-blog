@@ -285,3 +285,5 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 }
 );
+
+module.exports = app;
