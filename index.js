@@ -28,6 +28,11 @@ app.use((req, res, next) => {
 
 app.use("/", mainRouter);
 
+app.get("/test", (req, res) =>
+{
+    return res.send("Working");
+});
+
 app.get("/*", (req, res) =>
 {
     let data = {

@@ -68,6 +68,11 @@ const storage = multer.diskStorage({
     }
 });
 
+app.get("/test", (req, res) =>
+{
+    return res.send("Working!");
+});
+
 app.get('/', (req, res) =>
 {
     if (!req.session.isLoggedIn || req.session.isLoggedIn === undefined)
