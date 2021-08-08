@@ -3,9 +3,4 @@ Thumbs.db
 db.json
 *.log
 node_modules/
-public/
 .deploy*/
-/blog/node_modules
-/blog/config/dbConfig.json
-/blog/adminPanelNew/conf/db/dbConfig.json
-/new-blog
