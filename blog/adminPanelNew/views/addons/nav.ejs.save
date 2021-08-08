@@ -29,9 +29,9 @@
     <center>
         <div class="user">
             <% if(user[0].profile_picture !== null) {%> 
-                <img id="avatar" width="100" class="uk-border-circle" src="<%= user[0].profile_picture%>" />
+                <img id="avatar" width="100" class="uk-border-circle" src="/images/avatar.jpg" />
             <% } else {%>
-                <img id="avatar" width="100" class="uk-border-circle" src="/images/default-user-image.png" />
+                <img id="avatar" width="100" class="uk-border-circle" src="" />
             <% } %>
             <div class="uk-margin-top"></div>
             <div id="name" class="uk-text-truncate"><%= user[0].first_name %> <%= user[0].last_name %> </div>

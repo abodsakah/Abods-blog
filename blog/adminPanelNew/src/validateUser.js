@@ -3,12 +3,13 @@ var conf = require("../conf/db/dbConfig.json");
 
 let db;
 
-(async function ()
+(async function (err)
 {
     db = await mysql.createConnection(conf);
-
+    if(err) {console.log(err);}
     process.on("exit", () =>
     {
+
         db.end();
     });
 })();
