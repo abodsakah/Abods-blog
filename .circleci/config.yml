@@ -7,6 +7,19 @@ orbs:
 workflows:
   sample:
     jobs:
+      - steps:
+	- run
+	  - name: Test Blog
+	  - command: |
+		cd blog
+		npm install
+		node index.js
+
+	  - name: Test Admin
+	  - command: |
+		cd adminPanelNew
+		npm install
+		node index.js
       - node/test:
           version: '15.1'
           # This is the node version to use for the `cimg/node` tag
