@@ -67,12 +67,55 @@ async function deleteEditorChoice(id){
     return result;
 }
 
-async function addEditorChoice(id){
+async function addEditorChoice(id)
+{
     let sql = "INSERT INTO editors_choice (post_id) VALUES (?)";
     let result = await db.query(sql, [id]);
     return result;
 }
 
+async function getAllPages()
+{
+    let sql = "SELECT * FROM pages ORDER BY id DESC;";
+    let result = await db.query(sql);
+    return result;
+}
+
+async function createPage(title, content, header_image, status, premalink)
+{
+    let sql = "INSERT INTO pages (title, content, status, premalink, image) VALUES (?, ?, ?, ?, ?);";
+    let result = await db.query(sql, [title, content, status, premalink,header_image]);
+    return result;
+}
+
+async function deletePage(id)
+{
+    let sql = "DELETE FROM `pages` WHERE id = ?";
+    let result = await db.query(sql, [id]);
+
+    return result;
+}
+
+async function getPageById(id)
+{
+    let sql = "SELECT * FROM pages WHERE id = ? ORDER BY id DESC";
+    let isnum = /^\d+$/.test(id);
+    if (isnum)
+    {
+        let result = await db.query(sql, [id]);
+        return await result[0];
+    } else
+    {
+        return [];
+    }
+}
+
+async function updatePage(id, title, content, header_image, status, premalink)
+{
+    let sql = "UPDATE pages SET title = ?, content = ?, image = ?, status = ?, premalink = ? WHERE id = ?;";
+    let result = await db.query(sql, [title, content, header_image, status, premalink, id]);
+    return result;
+}
 module.exports = {
     getAllPosts,
     getPostById,
@@ -81,5 +124,10 @@ module.exports = {
     deletePost,
     getEditorChoice,
     deleteEditorChoice,
-    addEditorChoice
+    addEditorChoice,
+    getAllPages,
+    createPage,
+    deletePage,
+    getPageById,
+    updatePage
 };

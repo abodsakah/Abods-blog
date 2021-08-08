@@ -27,12 +27,12 @@ async function getBanners()
 
 router.get('/', async (req, res) =>
 {
-    var posts = await postsManager.getPosts();
+    var posts = await postsManager.getPostLimit();
     var banners = await getBanners();
     let data = {
         posts,
         banners,
-        title: 'Blog',
+        title: "Abod's Blog",
     }
 
     res.render('pages/index', data);
@@ -57,15 +57,28 @@ router.get('/post/:id', async (req, res) =>
 
         res.render("pages/404", data);  
     }
+}); 
+
+router.get("/page/:premalink", async (req, res) =>
+{
+    var link = req.params.premalink;
+    var pageInfo = await postsManager.getPageByLink(link);
+    console.log(pageInfo);
+    let data = {
+        title: `${pageInfo[0].title}| Abod's blog`,
+        pageInfo
+    }
+    res.render("pages/page", data);
 });
 
-router.get("/privacy-policy", async (req, res) =>
+router.get("/blog", async (req, res) =>
 {
+    var posts = await postsManager.getPosts();
     let data = {
-        title: "Privacy Policy | Abod's blog"
+        posts,
+        title: "All posts | Abod's blog"
     }
-
-    res.render("pages/privacy-policy", data);
+    res.render("pages/blog", data);
 });
 
 module.exports = router;

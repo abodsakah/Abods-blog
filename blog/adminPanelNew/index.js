@@ -17,7 +17,9 @@ var router = express.Router();
 var app = express();
 
 let loginErrors = [];
-let postErrors= [];
+let postErrors = [];
+
+const dashbaordRouter = require("./routes/dashboard");
 
 //setup session
 app.use(session({
@@ -33,7 +35,7 @@ app.use(session({
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use("/dashboard", dashbaordRouter);
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -82,168 +84,6 @@ app.get('/', (req, res) =>
     }
 });
 
-app.get("/dashboard", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var user = await userValidtor.getUserByEmail(req.session.user);
-
-        let data = {
-                title: "Admin Panel Dashboard | Abod's blog",
-                user
-        }
-        res.render('pages/dashboard.ejs', data);
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-app.get('/dashboard/articles', async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var articles = await blogHandler.getAllPosts();
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        let data = {
-            title: "Admin Panel Dashboard | Abod's blog",
-            articles,
-            user
-        }
-        res.render('pages/articles-list.ejs', data);
-    } else
-    {
-        res.redirect('/');
-    }
-
-});
-
-app.get("/dashboard/edit/post/:id", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var post = await blogHandler.getPostById(req.params.id);
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        let data = {
-            title: "Admin Panel Dashboard | Abod's blog",
-            post,
-            user
-        }
-        res.render('pages/edit-post.ejs', data);
-    } else
-    {
-        res.redirect('/');   
-    }
-});
-
-app.get("/dashboard/create/post", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        console.log(user[0].username);
-        let data = {
-            title: "Create post | Abod's blog",
-            user
-        }
-        res.render('pages/create-post.ejs', data);
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-app.get("/dashboard/delete/post/:id", async (req, res) =>
-{
-    
-    if (req.session.isLoggedIn)
-    {
-        var post = await blogHandler.deletePost(req.params.id);
-        res.redirect('/dashboard/articles');
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-app.get("/dashboard/editor-choice", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        var editorChoice = await blogHandler.getEditorChoice();
-        var posts = await blogHandler.getAllPosts();
-        let data = {
-            title: "Admin Panel Dashboard | Abod's blog",
-            user,
-            editorChoice,
-            posts
-        }
-        res.render('pages/editor-choice.ejs', data);
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-app.post("/dashboard/editor-choice", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var editorChoice = await blogHandler.addEditorChoice(req.body.choice);
-        res.redirect('/dashboard/editor-choice');
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-app.get("/dashboard/editor-choice/delete/:id", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var editorChoice = await blogHandler.deleteEditorChoice(req.params.id);
-        res.redirect('/dashboard/editor-choice');
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-
-app.post("/dashboard/create/post", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        var title = req.body.title;
-        var content = req.body.bodyContent;
-        blogHandler.createPost(title, content, req.body.headerImage, req.body.tags, req.body.status, req.body.postMeta, user[0].username);
-        res.redirect('/dashboard/articles');
-    } else
-    {
-        res.redirect('/');
-    }
-});
-
-app.post("/dashboard/edit/post/:id", async (req, res) =>
-{
-    if (req.session.isLoggedIn)
-    {
-        let uploads = multer({ storage: storage }).single("headerImage");
-
-        var post = await blogHandler.getPostById(req.params.id);
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        var title = req.body.title;
-        var content = req.body.bodyContent;
-
-        blogHandler.updatePost(req.params.id, title, content, req.body.headerImage, req.body.tags, req.body.status, req.body.meta);
-        res.redirect("/dashboard/articles");
-    }else
-    {
-        res.redirect('/');
-    }
-});
 
 app.post('/', async (req, res) =>
 {

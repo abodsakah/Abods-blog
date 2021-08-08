@@ -21,6 +21,13 @@ async function getPosts() {
     return await result;
 }
 
+async function getPostLimit()
+{
+    let sql = "SELECT * FROM Articals ORDER BY id DESC LIMIT 5";
+    let result = await db.query(sql);
+    return await result;
+}
+
 async function getPostById(id)
 {
     let sql = "SELECT * FROM Articals WHERE id = ? ORDER BY id DESC";
@@ -42,8 +49,17 @@ async function getEditorChoice()
     return await result;
 }
 
+async function getPageByLink(link)
+{
+    let sql = "SELECT * FROM pages WHERE premalink = ?";
+    let result = await db.query(sql, [link]);
+    return await result;
+}
+
 module.exports = {
     getPosts,
     getPostById,
-    getEditorChoice
+    getEditorChoice,
+    getPageByLink,
+    getPostLimit
 };

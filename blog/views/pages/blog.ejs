@@ -1,0 +1,37 @@
+<%- include("../addons/head"), {title:title} %>
+<%- include("../addons/navbar") %> 
+
+<br>
+<br>
+
+<!-- Container -->
+<div class="uk-container uk-container-xlarge ">
+    <h1 class="uk-heading-medium uk-heading-divider">All posts</h1>
+
+
+    <!--Blog -->
+    <% for(var post of posts) { %>
+        <% if(post.status === 1) {%>  
+    <!-- Artical cards -->
+        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+            <% if(post.header_image !== null) {%> 
+            <div class="uk-card-media-left uk-cover-container">
+                <img src="<%= post.header_image %>" alt="Placeholder Image" uk-cover>
+                <canvas width="600" height="400"></canvas>
+            </div>
+            <% } %> 
+            <div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title"><%= post.title %></h3>
+                    <p> <%= post.post_meta %>  </p>
+                    <br>
+                    <p><a class="uk-button uk-button-default" href="/post/<%= post.id%>">Read More</a></p>
+
+                </div>
+            </div>
+        </div>
+    <!--Artical cards END-->
+    <% }} %>
+</div>
+
+<%- include("../addons/footer") %>
