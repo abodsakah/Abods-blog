@@ -10,7 +10,7 @@ var userValidtor = require('./src/validateUser');
 const { json } = require('body-parser');
 const multer = require('multer');
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 3000;
 
 var router = express.Router();
 var app = express();
