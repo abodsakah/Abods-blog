@@ -1,5 +1,5 @@
 var mysql = require('promise-mysql');
-var conf = require('../config/dbConfig.json');
+var conf = require('../conf/db/dbConfig.json');
 
 let db;
 

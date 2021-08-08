@@ -20,7 +20,7 @@ router.get("/", async (req, res) =>
                 title: "Admin Panel Dashboard | Abod's blog Admin",
                 user
         }
-        res.render('pages/dashboard.ejs', data);
+        res.render('admin/pages/dashboard.ejs', data);
     } else
     {
         res.redirect('/');
@@ -38,7 +38,7 @@ router.get('/articles', async (req, res) =>
             articles,
             user
         }
-        res.render('pages/articles-list.ejs', data);
+        res.render('admin/pages/articles-list.ejs', data);
     } else
     {
         res.redirect('/');
@@ -57,7 +57,7 @@ router.get('/pages', async (req, res) =>
             pages,
             user
         }
-        res.render('pages/pages.ejs', data);
+        res.render('admin/pages/pages.ejs', data);
     } else
     {
         res.redirect('/');
@@ -75,7 +75,7 @@ router.get("/edit/post/:id", async (req, res) =>
             post,
             user
         }
-        res.render('pages/edit-post.ejs', data);
+        res.render('admin/pages/edit-post.ejs', data);
     } else
     {
         res.redirect('/');   
@@ -93,7 +93,7 @@ router.get("/edit/page/:id", async (req, res) =>
             page,
             user
         }
-        res.render('pages/edit-page.ejs', data);
+        res.render('admin/pages/edit-page.ejs', data);
     } else
     {
         res.redirect('/');   
@@ -109,7 +109,7 @@ router.get("/create/post", async (req, res) =>
             title: "Create post | Abod's blog Admin",
             user
         }
-        res.render('pages/create-post.ejs', data);
+        res.render('admin/pages/create-post.ejs', data);
     } else
     {
         res.redirect('/');
@@ -125,7 +125,7 @@ router.get("/create/page", async (req, res) =>
             title: "Create page | Abod's blog Admin",
             user
         }
-        res.render('pages/create-page.ejs', data);
+        res.render('admin/pages/create-page.ejs', data);
     } else
     {
         res.redirect('/');
@@ -171,7 +171,7 @@ router.get("/editor-choice", async (req, res) =>
             editorChoice,
             posts
         }
-        res.render('pages/editor-choice.ejs', data);
+        res.render('admin/pages/editor-choice.ejs', data);
     } else
     {
         res.redirect('/');
