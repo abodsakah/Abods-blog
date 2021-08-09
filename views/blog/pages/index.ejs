@@ -2,14 +2,14 @@
 <%- include("../addons/navbar") %> 
 
 <!-- Slideshow -->
-<div class="uk-position-relative uk-visible-toggle uk-light"  uk-slideshow="min-height: 300; max-height: 600; autoplay: true;" tabindex="-1" uk-slideshow>
+<div class="uk-position-relative uk-visible-toggle uk-light"  uk-slideshow="min-height: 400; max-height: 600; autoplay: true;" tabindex="-1" uk-slideshow>
 
     <ul class="uk-slideshow-items">
         <% for(var banner of banners){%>
         <li>
             <img src="<%= banner.header_image %> " alt="Placeholder Image" uk-cover>
-            <div class="uk-overlay uk-overlay-primary uk-position-left uk-text-center uk-transition-slide-left" style="width: 20%">
-                <h3 class="uk-margin-remove" style><%= banner.title %></h3>
+            <div class="uk-overlay  uk-width-1-4@m uk-overlay-primary uk-position-left uk-text-center uk-transition-slide-left banner-overlay">
+                <h3 class="uk-margin-remove banner-text" style><%= banner.title %></h3>
                 <br>
                 <br>
                 <p class="uk-margin-remove"><%= banner.post_meta %></p>
@@ -49,7 +49,7 @@
             <% } %> 
             <div>
                 <div class="uk-card-body">
-                    <h3 class="uk-card-title"><%= post.title %></h3>
+                    <h3 class="uk-card-title card-title"><a href="/post/<%= post.id%>"><%= post.title %></a></h3>
                     <p> <%= post.post_meta %>  </p>
                     <br>
                     <p><a class="uk-button uk-button-default" href="/post/<%= post.id%>">Read More</a></p>

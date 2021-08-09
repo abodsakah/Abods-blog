@@ -118,3 +118,24 @@ html{
   color: #b0b0b0;
   cursor: pointer;
 }
+
+
+.card-title a{
+  color: black !important;
+}
+
+@media screen and (max-width: 768px) {
+  .banner-text{
+    font-size: 1em !important;
+  }
+  .baner-overlay{
+    width: 100% !important;
+    background-color: red !important;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .baner-overlay{
+    width: 20% !important;
+  }
+}
