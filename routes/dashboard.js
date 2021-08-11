@@ -1,6 +1,9 @@
 "use strict";
 
 const express = require("express");
+var cron = require('node-cron');
+
+
 const router = express.Router();
 
 const app = express();
@@ -10,6 +13,14 @@ var blogHandler = require('../src/blogHandler');
 const { json } = require('body-parser');
 const multer = require('multer');
 
+var postAmount = 0;
+
+cron.schedule('* * * * *', async function ()
+{
+    postAmount = await blogHandler.getAmountPosts();
+    console.log("Amount of posts: " + postAmount);
+});
+
 router.get("/", async (req, res) =>
 {
     if (req.session.isLoggedIn)
@@ -17,8 +28,9 @@ router.get("/", async (req, res) =>
         var user = await userValidtor.getUserByEmail(req.session.user);
 
         let data = {
-                title: "Admin Panel Dashboard | Abod's blog Admin",
-                user
+            title: "Admin Panel Dashboard | Abod's blog Admin",
+            user,
+            postAmount
         }
         res.render('admin/pages/dashboard.ejs', data);
     } else

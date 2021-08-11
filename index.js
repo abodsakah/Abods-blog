@@ -1,14 +1,32 @@
+// import Analytics from 'analytics'
+// import googleAnalytics from '@analytics/google-analytics'
+
+
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
-
-
-
+var gapi = require("googleapis");
 var userValidtor = require('./src/validateUser');
+var fs = require('fs');
+
+
 const { json } = require('body-parser');
 const multer = require('multer');
+
+require('console-stamp')(console, { 
+    format: ':date(yyyy/mm/dd HH:MM:ss.l) :label' 
+} );
+
+const GA_TRACKING_ID = process.env.GA_TRACKING_ID;
+
+var errorLog = fs.createWriteStream('debug.log', { flags: 'a' });
+process.stdout.write = process.stderr.write = errorLog.write.bind(errorLog);
+process.on('UnhandledPromiseRejectionWarning', function (err)
+{
+    console.error((err && err.stack) ? err.stack : err);
+});
 
 var port = process.env.PORT || 3000;
 
@@ -20,6 +38,7 @@ let postErrors = [];
 
 const dashbaordRouter = require("./routes/dashboard");
 const blogRouter = require("./routes/blog");
+const { GoogleApis } = require('googleapis');
 
 //setup session
 app.use(session({

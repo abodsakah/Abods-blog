@@ -116,6 +116,14 @@ async function updatePage(id, title, content, header_image, status, premalink)
     let result = await db.query(sql, [title, content, header_image, status, premalink, id]);
     return result;
 }
+
+async function getAmountPosts()
+{
+    let sql = "SELECT COUNT(*) FROM Articals;";
+    let result = await db.query(sql);
+    return await result[0]["COUNT(*)"];
+}
+
 module.exports = {
     getAllPosts,
     getPostById,
@@ -129,5 +137,6 @@ module.exports = {
     createPage,
     deletePage,
     getPageById,
-    updatePage
+    updatePage,
+    getAmountPosts
 };
