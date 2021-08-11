@@ -21,8 +21,9 @@ require('console-stamp')(console, {
 
 const GA_TRACKING_ID = process.env.GA_TRACKING_ID;
 
-var errorLog = fs.createWriteStream('debug.log', { flags: 'a' });
+var errorLog = fs.createWriteStream('./debug/debug.log', { flags: 'a' });
 process.stdout.write = process.stderr.write = errorLog.write.bind(errorLog);
+
 process.on('UnhandledPromiseRejectionWarning', function (err)
 {
     console.error((err && err.stack) ? err.stack : err);
