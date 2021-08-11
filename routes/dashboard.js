@@ -18,7 +18,6 @@ var postAmount = 0;
 cron.schedule('* * * * *', async function ()
 {
     postAmount = await blogHandler.getAmountPosts();
-    console.log("Amount of posts: " + postAmount);
 });
 
 router.get("/", async (req, res) =>
