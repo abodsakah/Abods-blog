@@ -34,7 +34,7 @@
         </div>
         <div>
             <h2 class="">Tags</h2>
-            <input class ="uk-input" type="text" name="tags" placeholder="A shortdescription of the post" value="<%= post[0].tags %> ">
+            <input class ="uk-input" id="tagInput" onload="removeTrailingSpace()" type="text" name="tags" placeholder="A shortdescription of the post" value="<%= post[0].tags %> ">
         </div>
         <br>
         <div>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <h2>Post meta</h2>
-        <textarea style="height: 100px; min-height:50px;max-height:150px; width:100%; min-width: 100%;" class ="uk-input" type="text" name="meta" placeholder="A short sentence to descripe the post">
+        <textarea id="postMeta" onload="removeTrailingSpace()" style="height: 100px; min-height:50px;max-height:150px; width:100%; min-width: 100%;" class ="uk-input" type="text" name="meta" placeholder="A short sentence to descripe the post">
             <%= post[0].post_meta %>
         </textarea>
     </div>
@@ -79,7 +79,13 @@
     forced_root_block : false,
 });
 
-  
+var meta = document.getElementById('postMeta');
+var tags = document.getElementById('tagInput');
+
+meta.value = meta.value.trim();
+tags.value = tags.value.trim();
+
+
 </script>
 
 <%- include("../addons/footer") %> 

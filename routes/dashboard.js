@@ -259,7 +259,7 @@ router.post("/edit/post/:id", async (req, res) =>
 {
     if (req.session.isLoggedIn)
     {
-        let uploads = multer({ storage: storage }).single("headerImage");
+        // let uploads = multer({ storage: storage }).single("headerImage");
 
         var post = await blogHandler.getPostById(req.params.id);
         var user = await userValidtor.getUserByEmail(req.session.user);
