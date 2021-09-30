@@ -1,59 +1,49 @@
-var mysql = require('promise-mysql');
-var conf = require('../conf/db/dbConfig.json');
+const { Sequelize, QueryTypes } = require('sequelize');
+const dotenv = require('dotenv').config({ path: './.env' });
 
-let db;
+const db = new Sequelize(dotenv.parsed.DB_NAME, dotenv.parsed.DB_LOGIN, dotenv.parsed.DB_PASSWORD, {
+    host: dotenv.parsed.DB_HOST,
+    dialect: 'mysql',
+});
 
 
-(async function ()
+async function getPosts()
 {
-    db = await mysql.createConnection(conf);
-
-    process.on("exit", () =>
-    {
-        db.end();
-    });
-})();
-
-
-async function getPosts() {
-    let sql = "SELECT * FROM Articals ORDER BY id DESC";
-    let result = await db.query(sql);
-    return await result;
+    const result = await db.query("SELECT * FROM Articals ORDER BY id DESC", { type: QueryTypes.SELECT })
+    return result;
 }
 
 async function getPostLimit()
 {
-    let sql = "SELECT * FROM Articals ORDER BY id DESC LIMIT 5";
-    let result = await db.query(sql);
-    return await result;
+    const result = await db.query("SELECT * FROM Articals ORDER BY id DESC LIMIT 5", { type: QueryTypes.SELECT })
+    return result;
 }
 
 async function getPostById(id)
 {
-    let sql = "SELECT * FROM Articals WHERE id = ? ORDER BY id DESC";
+    
     let isnum = /^\d+$/.test(id);
     if (isnum)
     {
-        let result = await db.query(sql, [id]);
-        return await result[0];
-    } else
-    {
-        return [];
+        const result = await db.query("SELECT * FROM Articals WHERE id = ? ORDER BY id DESC", { type: QueryTypes.SELECT, replacements: [id] })
+        return result;
     }
+    
+    return [];
+    
+    
 }
 
 async function getEditorChoice()
 {
-    let sql = "SELECT * FROM editors_choice ORDER BY post_id DESC";
-    let result = await db.query(sql);
-    return await result;
+    const result = await db.query("SELECT * FROM `banners`", { type: QueryTypes.SELECT })
+    return result;
 }
 
 async function getPageByLink(link)
 {
-    let sql = "SELECT * FROM pages WHERE premalink = ?";
-    let result = await db.query(sql, [link]);
-    return await result;
+    const result = await db.query("SELECT * FROM pages WHERE premalink = ?", { type: QueryTypes.SELECT, replacements: [link] })
+    return result;
 }
 
 module.exports = {

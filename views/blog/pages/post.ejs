@@ -2,9 +2,9 @@
 <%- include("../addons/navbar") %>
 
 <div class="uk-cover-container uk-height-medium">
-    <% if(postInfo.header_image !== null) {%> 
+    <% if(postInfo[0].header_image !== null) {%> 
 <!-- Header image -->
-    <img src="<%- postInfo.header_image %> " alt="" uk-cover>
+    <img src="<%- postInfo[0].header_image %> " alt="" uk-cover>
 <% }else{ %>
     <img src="/images/grey.jpg" alt="" uk-cover>
 <% } %> 
@@ -14,17 +14,18 @@
 <div class="uk-container uk-container-xlarge ">
     <ul class="uk-breadcrumb">
         <li><a href="/">Home</a></li>
-        <li><span><%= postInfo.title %></span></li>
+        <% console.log(postInfo[0]); %> 
+        <li><span><%= postInfo[0].title %></span></li>
     </ul>
     <article class="uk-article">
 
-        <h1 class="uk-article-title"><a class="uk-link-reset" href=""><%= postInfo.title %></a></h1>
+        <h1 class="uk-article-title"><a class="uk-link-reset" href=""><%= postInfo[0].title %></a></h1>
 
-        <p class="uk-article-meta">Written by <a href="#"> <%= postInfo.author %>  </a> on <%= postInfo.date_created.substring(0,16) %>.
+        <p class="uk-article-meta">Written by <a href="#"> <%= postInfo[0].author %>  </a> on <%= postInfo[0].date_created.substring(0,16) %>.
 
-        <p class="uk-text-lead"> <%= postInfo.post_meta %>  </p>
+        <p class="uk-text-lead"> <%= postInfo[0].post_meta %>  </p>
 
-        <p> <%- postInfo.body %>  </p>
+        <p> <%- postInfo[0].body %>  </p>
 
     </article>
 </div>

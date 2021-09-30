@@ -20,7 +20,8 @@ async function getBanners()
     let res = [];
     for (var choice of ediorChoice)
     {
-        res.push(await postsManager.getPostById(choice.post_id));
+        let post = await postsManager.getPostById(choice.post_id);
+        res.push(post[0]);
     }
     return res;
 }

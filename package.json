@@ -18,9 +18,10 @@
     "express-session": "^1.17.2",
     "googleapis": "^84.0.0",
     "multer": "^1.4.2",
-    "node-cron": "^3.0.0",
+    "mysql2": "^2.3.0",
     "nodemon": "^2.0.12",
     "promise-mysql": "^5.0.3",
-    "q": "^1.5.1"
+    "q": "^1.5.1",
+    "sequelize": "^6.6.5"
   }
 }

@@ -1,23 +1,15 @@
-var mysql = require("promise-mysql");
-var conf = require("../conf/db/dbConfig.json");
+const { Sequelize, QueryTypes } = require('sequelize');
+const dotenv = require('dotenv').config({ path: './.env' });
 
-let db;
+const db = new Sequelize(dotenv.parsed.DB_NAME, dotenv.parsed.DB_LOGIN, dotenv.parsed.DB_PASSWORD, {
+    host: dotenv.parsed.DB_HOST,
+    dialect: 'mysql',
+});
 
-(async function (err)
+async function getUserByEmail(email)
 {
-    db = await mysql.createConnection(conf);
-    if(err) {console.log(err);}
-    process.on("exit", () =>
-    {
-
-        db.end();
-    });
-})();
-
-async function getUserByEmail(email) {
-    let sql = `SELECT * FROM User WHERE email = ? LIMIT 1`;
-    let result = await db.query(sql, [email]);
-    return await result;
+    const result = await db.query("SELECT * FROM User WHERE email = ? LIMIT 1", { type: QueryTypes.SELECT, replacements: [email] });
+    return result;
 }
 
 module.exports = {

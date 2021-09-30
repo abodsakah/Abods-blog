@@ -1,30 +1,21 @@
-var mysql = require("promise-mysql");
-var conf = require("../conf/db/dbConfig.json");
+const { Sequelize, QueryTypes } = require('sequelize');
+const dotenv = require('dotenv').config({ path: './.env' });
 
-let db;
-
-(async function ()
-{
-    db = await mysql.createConnection(conf);
-
-    process.on("exit", () =>
-    {
-        db.end();
-    });
-})();
+const db = new Sequelize(dotenv.parsed.DB_NAME, dotenv.parsed.DB_LOGIN, dotenv.parsed.DB_PASSWORD, {
+    host: dotenv.parsed.DB_HOST,
+    dialect: 'mysql',
+});
 
 async function getAllPosts()
 {
-    let sql = "SELECT * FROM Articals ORDER BY id DESC;";
-    let result = await db.query(sql);
+    const result = await db.query("SELECT * FROM Articals ORDER BY id DESC;", { type: QueryTypes.SELECT });
     return result;
 }
 
 async function getPostById(id)
 {
-    let sql = "SELECT * FROM Articals WHERE id = ?;";
-    let result = await db.query(sql, id);
-    return result;   
+    const result = await db.query("SELECT * FROM Articals WHERE id = ?", { type: QueryTypes.SELECT, replacements: [id] });
+    return result;
 }
 
 async function updatePost(id, title, content, header_image, tags, status, post_meta)
@@ -32,8 +23,7 @@ async function updatePost(id, title, content, header_image, tags, status, post_m
     var today = new Date();
     var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
-    let sql = "UPDATE Articals SET title = ?, body = ?, header_image = ?, tags = ?, status = ?, post_meta = ?, date_updated = ? WHERE id = ?;";
-    let result = await db.query(sql, [title, content, header_image, tags, status, post_meta, date, id]);
+    const result = await db.query("UPDATE Articals SET title = ?, body = ?, header_image = ?, tags = ?, status = ?, post_meta = ?, date_updated = ? WHERE id = ?", { type: QueryTypes.UPDATE, replacements: [title, content, header_image, tags, status, post_meta, date, id] });
     return result;
 }
 
@@ -41,87 +31,74 @@ async function createPost(title, content, header_image, tags, status, post_meta,
 {
     var today = new Date();
     var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-    let sql = "INSERT INTO Articals (title, body, header_image, tags, status, post_meta, date_created, date_updated, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    let result = await db.query(sql, [title, content, header_image, tags, status, post_meta, date, date, author_id]);
+    const result = await db.query("INSERT INTO Articals (title, body, header_image, tags, status, post_meta, date_created, date_updated, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", { type: QueryTypes.INSERT, replacements: [title, content, header_image, tags, status, post_meta, date, date, author_id] });
     return result;
 }
 
 async function deletePost(id)
 {
-    let sql = "DELETE FROM `Articals` WHERE `Articals`.`id` = ?";
-    let result = await db.query(sql, [id]);
-
+    const result = await db.query("DELETE FROM `Articals` WHERE `Articals`.`id` = ?", { type: QueryTypes.DELETE, replacements: [id] });
     return result;
 }
 
 async function getEditorChoice()
 {
-    let sql = "SELECT Articals.id, Articals.title FROM Articals INNER JOIN editors_choice ON Articals.id = editors_choice.post_id ORDER BY id DESC";
-    let result = await db.query(sql);
-    return result;   
+    const result = await db.query("SELECT Articals.id, Articals.title FROM Articals INNER JOIN editors_choice ON Articals.id = editors_choice.post_id ORDER BY id DESC", { type: QueryTypes.SELECT });
+    return result;  
 }
 
-async function deleteEditorChoice(id){
-    let sql = "DELETE FROM editors_choice WHERE post_id = ?";
-    let result = await db.query(sql, [id]);
+async function deleteEditorChoice(id)
+{
+    const result = await db.query("DELETE FROM editors_choice WHERE post_id = ?", { type: QueryTypes.DELETE, replacements: [id] });
     return result;
 }
 
 async function addEditorChoice(id)
 {
-    let sql = "INSERT INTO editors_choice (post_id) VALUES (?)";
-    let result = await db.query(sql, [id]);
+    const result = await db.query("INSERT INTO editors_choice (post_id) VALUES (?)", { type: QueryTypes.INSERT, replacements: [id] });
     return result;
 }
 
 async function getAllPages()
 {
-    let sql = "SELECT * FROM pages ORDER BY id DESC;";
-    let result = await db.query(sql);
+    const result = await db.query("SELECT * FROM pages ORDER BY id DESC", { type: QueryTypes.SELECT });
     return result;
 }
 
 async function createPage(title, content, header_image, status, premalink)
 {
-    let sql = "INSERT INTO pages (title, content, status, premalink, image) VALUES (?, ?, ?, ?, ?);";
-    let result = await db.query(sql, [title, content, status, premalink,header_image]);
+    const result = await db.query("INSERT INTO pages (title, content, status, premalink, image) VALUES (?, ?, ?, ?, ?)", { type: QueryTypes.INSERT, replacements: [title, content, status, premalink, header_image] });
     return result;
 }
 
 async function deletePage(id)
 {
-    let sql = "DELETE FROM `pages` WHERE id = ?";
-    let result = await db.query(sql, [id]);
-
+    const result = await db.query("DELETE FROM `pages` WHERE id = ?", { type: QueryTypes.DELETE, replacements: [id] });
     return result;
 }
 
 async function getPageById(id)
 {
-    let sql = "SELECT * FROM pages WHERE id = ? ORDER BY id DESC";
     let isnum = /^\d+$/.test(id);
     if (isnum)
     {
-        let result = await db.query(sql, [id]);
-        return await result[0];
-    } else
-    {
-        return [];
+        const result = await db.query("SELECT * FROM pages WHERE id = ? ORDER BY id DESC", { type: QueryTypes.SELECT, replacements: [id] });
+        return result;
     }
+
+    return [];
 }
 
 async function updatePage(id, title, content, header_image, status, premalink)
 {
-    let sql = "UPDATE pages SET title = ?, content = ?, image = ?, status = ?, premalink = ? WHERE id = ?;";
-    let result = await db.query(sql, [title, content, header_image, status, premalink, id]);
+    const result = await db.query("UPDATE pages SET title = ?, content = ?, image = ?, status = ?, premalink = ? WHERE id = ?;", { type: QueryTypes.UPDATE, replacements: [title, content, header_image, status, premalink, id] });
     return result;
 }
 
 async function getAmountPosts()
 {
-    let sql = "SELECT COUNT(*) FROM Articals;";
-    let result = await db.query(sql);
-    return await result[0]["COUNT(*)"];
+    const result = await db.query("SELECT COUNT(*) FROM Articals;", { type: QueryTypes.UPDATE });
+    return result;
 }
 
 module.exports = {

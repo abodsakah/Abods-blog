@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-var cron = require('node-cron');
 
 
 const router = express.Router();
@@ -13,12 +12,7 @@ var blogHandler = require('../src/blogHandler');
 const { json } = require('body-parser');
 const multer = require('multer');
 
-var postAmount = 0;
-
-cron.schedule('* * * * *', async function ()
-{
-    postAmount = await blogHandler.getAmountPosts();
-});
+let postAmount = 0;
 
 router.get("/", async (req, res) =>
 {

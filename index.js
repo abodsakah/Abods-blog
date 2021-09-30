@@ -29,7 +29,7 @@ process.on('UnhandledPromiseRejectionWarning', function (err)
     console.error((err && err.stack) ? err.stack : err);
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 2000;
 
 var router = express.Router();
 var app = express();
@@ -87,11 +87,6 @@ const storage = multer.diskStorage({
     {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
-});
-
-app.get("/test", (req, res) =>
-{
-    return res.send("Working!");
 });
 
 app.get('/login', (req, res) =>
