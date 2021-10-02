@@ -19,6 +19,7 @@
     "googleapis": "^84.0.0",
     "multer": "^1.4.2",
     "mysql2": "^2.3.0",
+    "node-schedule": "^2.0.0",
     "nodemon": "^2.0.12",
     "promise-mysql": "^5.0.3",
     "q": "^1.5.1",

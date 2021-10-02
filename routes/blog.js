@@ -8,15 +8,18 @@
 const express = require('express');
 const postsManager = require('../src/getPosts');
 const path = require("path");
+const schedule = require('node-schedule');
 const router = express.Router();
-
 const app = express();
+
+let posts;
+var ediorChoice;
+(async () => { posts = await postsManager.getPostLimit(); ediorChoice = await postsManager.getEditorChoice()})();
 
 app.use(express.static(path.join(__dirname, "./public")));
 
 async function getBanners()
 {
-    var ediorChoice = await postsManager.getEditorChoice();
     let res = [];
     for (var choice of ediorChoice)
     {
@@ -26,9 +29,18 @@ async function getBanners()
     return res;
 }
 
+
+const job = schedule.scheduleJob('* * * *', async function ()
+{
+    posts = await postsManager.getPostLimit();
+    ediorChoice = await postsManager.getEditorChoice();
+    console.log("Refreshed");
+});
+
+job.schedule();
+
 router.get('/', async (req, res) =>
 {
-    var posts = await postsManager.getPostLimit();
     var banners = await getBanners();
     let data = {
         posts,
