@@ -10,14 +10,10 @@ var bcrypt = require('bcrypt');
 var gapi = require("googleapis");
 var userValidtor = require('./src/validateUser');
 var fs = require('fs');
+const fileupload = require('express-fileupload');
+const temp = require("./routes/temp")
 
-
-const { json } = require('body-parser');
-const multer = require('multer');
-
-require('console-stamp')(console, { 
-    format: ':date(yyyy/mm/dd HH:MM:ss.l) :label' 
-} );
+require('console-stamp')(console);
 
 const GA_TRACKING_ID = process.env.GA_TRACKING_ID;
 
@@ -41,6 +37,10 @@ const dashbaordRouter = require("./routes/dashboard");
 const blogRouter = require("./routes/blog");
 const { GoogleApis } = require('googleapis');
 
+app.use(fileupload());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //setup session
 app.use(session({
     name: 'Admin panel',
@@ -54,9 +54,11 @@ app.use(session({
 
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+
+
 app.use("/dashboard", dashbaordRouter);
 app.use("/", blogRouter);
+app.use("/new", temp);
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -77,17 +79,6 @@ app.listen(port, () => {
     console.log('Server listening on port ' + port);
 }
 );
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb)
-    {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb)
-    {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
 
 app.get('/login', (req, res) =>
 {

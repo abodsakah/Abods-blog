@@ -10,7 +10,15 @@ const app = express();
 var userValidtor = require('../src/validateUser');
 var blogHandler = require('../src/blogHandler');
 const { json } = require('body-parser');
-const multer = require('multer');
+const fileUpload = require('express-fileupload');
+
+app.use(fileUpload({
+    safeFileNames: true,
+    useTempFiles: true,
+    tempFileDir: './public/tmp/',
+    debug: true,
+    createParentPath: true
+}));
 
 let postAmount = 0;
 
@@ -73,6 +81,7 @@ router.get("/edit/post/:id", async (req, res) =>
 {
     if (req.session.isLoggedIn)
     {
+        
         var post = await blogHandler.getPostById(req.params.id);
         var user = await userValidtor.getUserByEmail(req.session.user);
         let data = {
@@ -253,14 +262,31 @@ router.post("/edit/post/:id", async (req, res) =>
 {
     if (req.session.isLoggedIn)
     {
-        // let uploads = multer({ storage: storage }).single("headerImage");
+        console.log(req.body);
+        var headerImg = req.files.headerImg;
+        if (headerImg !== undefined)
+        {
+            var file = req.files.headerImg;
+            file.mv(`./public/uploads/${file.name}`, (err) =>
+            {
+                if (err)
+                {
+                    console.log(err);
+                } else
+                {
+                    var title = req.body.title;
+                    var content = req.body.bodyContent;
 
-        var post = await blogHandler.getPostById(req.params.id);
-        var user = await userValidtor.getUserByEmail(req.session.user);
-        var title = req.body.title;
-        var content = req.body.bodyContent;
+                    blogHandler.updatePost(req.params.id, title, content, file.name, req.body.tags, req.body.status, req.body.meta);
+                }
+            });
+        } else
+        {
+            var title = req.body.title;
+            var content = req.body.bodyContent;
 
-        blogHandler.updatePost(req.params.id, title, content, req.body.headerImage, req.body.tags, req.body.status, req.body.meta);
+            blogHandler.updatePostWithoutImage(req.params.id, title, content, req.body.tags, req.body.status, req.body.meta);
+        }
         res.redirect("/dashboard/articles");
     }else
     {
@@ -272,8 +298,6 @@ router.post("/edit/page/:id", async (req, res) =>
 {
     if (req.session.isLoggedIn)
     {
-        // let uploads = multer({ storage: storage }).single("headerImage");
-
         var title = req.body.title;
         var content = req.body.bodyContent;
 

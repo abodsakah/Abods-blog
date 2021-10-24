@@ -51,5 +51,6 @@ module.exports = {
     getPostById,
     getEditorChoice,
     getPageByLink,
-    getPostLimit
+    getPostLimit,
+    
 };

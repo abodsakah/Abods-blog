@@ -27,6 +27,15 @@ async function updatePost(id, title, content, header_image, tags, status, post_m
     return result;
 }
 
+async function updatePostWithoutImage(id, title, content, tags, status, post_meta)
+{
+    var today = new Date();
+    var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+    const result = await db.query("UPDATE Articals SET title = ?, body = ?, tags = ?, status = ?, post_meta = ?, date_updated = ? WHERE id = ?", { type: QueryTypes.UPDATE, replacements: [title, content, tags, status, post_meta, date, id] });
+    return result;
+}
+
 async function createPost(title, content, header_image, tags, status, post_meta, author_id)
 {
     var today = new Date();
@@ -105,6 +114,7 @@ module.exports = {
     getAllPosts,
     getPostById,
     updatePost,
+    updatePostWithoutImage,
     createPost,
     deletePost,
     getEditorChoice,

@@ -37,7 +37,7 @@ router.get('/', async (req, res) =>
         title: "Abod's Blog",
     }
 
-    res.render('blog/pages/index', data);
+    res.render('new/pages/index', data);
 });
 
 router.get('/post/:id', async (req, res) =>
@@ -51,13 +51,13 @@ router.get('/post/:id', async (req, res) =>
             title: `${postInfo.title} | Abod's blog`
         }
 
-        res.render("blog/pages/post", data);
+        res.render("new/pages/post", data);
     }else{
         let data = {
             title: "Oops, wrong page | Abod's blog"
         }
 
-        res.render("blog/pages/404", data);  
+        res.render("new/pages/404", data);  
     }
 }); 
 
@@ -69,7 +69,7 @@ router.get("/page/:premalink", async (req, res) =>
         title: `${pageInfo[0].title}| Abod's blog`,
         pageInfo
     }
-    res.render("blog/pages/page", data);
+    res.render("new/pages/page", data);
 });
 
 router.get("/blog", async (req, res) =>
@@ -79,7 +79,7 @@ router.get("/blog", async (req, res) =>
         posts,
         title: "All posts | Abod's blog"
     }
-    res.render("blog/pages/blog", data);
+    res.render("new/pages/blog", data);
 });
 
 module.exports = router;
