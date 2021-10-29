@@ -1,22 +1,17 @@
-<!-- Footer -->
-<div class="uk-card-footer">All rights reserved. <a href="http://abodsakka.xyz">Abdulrahman Sakah</a> 2021-2023</div>
-<div class="uk-container uk-container-xlarge uk-align-left">
-    <h3>Links</h3>
+<script>
+    // no jquery
 
-    <ul style="list-style: none;">
-        <li><a href="http://abodsakka.xyz">Main website</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="/page/privacy-policy">Privacy Policy</a></li>
-
-    </ul>
-    <!-- Place this tag where you want the button to render. -->
-</div>
-<div class="uk-container uk-container-xlarge uk-align-right">
-<a class="github-button" href="https://github.com/abodsakah" data-size="large" aria-label="Follow @abodsakah onGitHub">Follow @abodsakah</a>
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="abodsakah" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-
-</div>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+    // close menu when clickes outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('nav-item') && !e.target.classList.contains('menubtn')) {
+            document.getElementById("nav-list").classList.toggle("show");
+            document.getElementById("nav-list").classList.toggle("closed");
+        }
+    });
+    function showMenu() {
+        document.getElementById("nav-list").classList.toggle("show");
+        document.getElementById("nav-list").classList.toggle("closed");
+    }
+</script>
 </body>
 </html>

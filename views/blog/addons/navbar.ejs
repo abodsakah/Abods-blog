@@ -1,30 +1,19 @@
-<!-- Main Navbar -->
-<nav class="uk-container uk-navbar">
-    <div class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            <li class="uk-active">
-                <a href="/"><h1>Abod's<strong class="cursive-text">Blog</strong></h1></a>
-            </li> 
-        </ul>
-    </div>
-    <div class="uk-navbar-right">
-        <ul class="uk-navbar-nav uk-visible@s">
-            <li><a class="uk-text-large" href="/">Home</a></li>
-            <li><a class="uk-text-large" href="/blog">Blog</a></li>
+<div class="navbar">
+    <a href="/" class="logo"><img src="/images/Logo.png" alt="Abod's blog"></a>
+    <i class="fas menubtn fa-bars" onclick="showMenu()"></i>
 
-        </ul>
-        <a href="#" class="uk-navbar-toggle uk-hidden@s" uk-navbar-toggle-icon uk-toggle="target: #sidenav"></a>
-    </div>
-</nav>
-</header>
-
-<div id="sidenav" uk-offcanvas="flip: true" class="uk-offcanvas">
-<div class="uk-offcanvas-bar">
-    <ul class="uk-nav">
-        <li><a class="uk-text-large" href="#">Home</a></li>
-        <li><a class="uk-text-large" href="#">Blog</a></li>
-        <li><a class="uk-text-large" href="#">Tags</a></li>
-        <li><a class="uk-text-large" href="#">About</a></li>
+    <ul class="nav-list closed" id="nav-list">
+        <li class="nav-item"">
+            <a href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+            <a href="/about">About</a>
+        </li>
+        <li class="nav-item">
+            <a href="/contact">Contact</a>
+        </li>
     </ul>
-</div>
 </div>

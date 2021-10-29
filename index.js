@@ -11,7 +11,6 @@ var gapi = require("googleapis");
 var userValidtor = require('./src/validateUser');
 var fs = require('fs');
 const fileupload = require('express-fileupload');
-const temp = require("./routes/temp")
 
 require('console-stamp')(console);
 
@@ -58,7 +57,6 @@ app.use(session({
 
 app.use("/dashboard", dashbaordRouter);
 app.use("/", blogRouter);
-app.use("/new", temp);
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));

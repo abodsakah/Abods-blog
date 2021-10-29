@@ -1,64 +1,29 @@
 <%- include("../addons/head"), {title:title} %>
 <%- include("../addons/navbar") %> 
 
-<!-- Slideshow -->
-<div class="uk-position-relative uk-visible-toggle uk-light"  uk-slideshow="min-height: 400; max-height: 600; autoplay: true;" tabindex="-1" uk-slideshow>
-
-    <ul class="uk-slideshow-items">
-        <% for(var banner of banners){%>
-        <li>
-            <img src="/uploads/<%= banner.header_image %> " alt="Placeholder Image" uk-cover>
-            <div class="uk-overlay  uk-width-1-4@m uk-overlay-primary uk-position-left uk-text-center uk-transition-slide-left banner-overlay">
-                <h3 class="uk-margin-remove banner-text" style><%= banner.title %></h3>
-                <br>
-                <br>
-                <p class="uk-margin-remove"><%= banner.post_meta %></p>
-                <br>
-                <br>
-                <p><a class="uk-button uk-button-default" href="/post/<%= banner.id%>">Read More</a></p>
-            </div>
-        </li>
-        <% }%> 
-    </ul>
-
-    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-</div>
-
-<!--Slideshow End -->
-
-<br>
-<br>
-
-<!-- Container -->
-<div class="uk-container uk-container-xlarge ">
-    <h1 class="uk-heading-medium uk-heading-divider">Recent posts</h1>
-
-
-    <!--Blog -->
+<div class="container">
+    <h1>Recent posts</h1>
+    <br>
     <% for(var post of posts) { %>
         <% if(post.status === 1) {%>  
-    <!-- Artical cards -->
-        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-            <% if(post.header_image !== null) {%> 
-            <div class="uk-card-media-left uk-cover-container">
-                <img src="/uploads/<%= post.header_image %>" alt="Placeholder Image" uk-cover>
-                <canvas width="600" height="400"></canvas>
-            </div>
-            <% } %> 
-            <div>
-                <div class="uk-card-body">
-                    <h3 class="uk-card-title card-title"><a href="/post/<%= post.id%>"><%= post.title %></a></h3>
-                    <p> <%= post.post_meta %>  </p>
-                    <br>
-                    <p><a class="uk-button uk-button-default" href="/post/<%= post.id%>">Read More</a></p>
-
+            <div class="artical-container" onclick="redirectToPost(<%= post.id %>)">
+                <% console.log(post.header_image) %> 
+                <% if(post.header_image !== "") {%> 
+                    <img src="/uploads/<%= post.header_image %>" alt="">
+                <% } else {%>
+                    <img src="/images/placeholder image.png" alt="">
+                <% } %>
+                <div class="artical-info">
+                    <h2><%= post.title %></h2>
+                    <p><%= post.post_meta %></p>
                 </div>
             </div>
-        </div>
-    <!--Artical cards END-->
     <% }} %>
 </div>
 
+<script>
+    function redirectToPost(postId){
+        window.location.href = "/post/" + postId;
+    }
+</script>
 <%- include("../addons/footer") %>

@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+$color-primary: #25262A;
+$color-secondary: #2d2f33;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar{
+    z-index: 6;
+    background-color: $color-primary;
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100%;
+    justify-content:space-evenly;
+    i{
+        color: white;
+    }
+    .logo{
+        align-self: center;
+        img{
+            height: 50px !important;
+        }
+        
+    }
+    .nav-list {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        align-self: center;
+        margin: 0;
+        padding: 0;
+        li {
+            margin-left: 20px;
+            height: fit-content;
+            a {
+                color: white;
+                text-decoration: none;
+                font-size: 20px;
+                font-weight: bold;
+                align-self: center;
+                transition: all 0.25s ease-in-out;
+                &:hover {
+                    color: #FFC107;
+                }
+            }
+        }
+    }
+}
+
+.container{
+    display: flex;
+    .index-header{
+        height: 50vh;
+        width: 100vw;
+        background-color: $color-primary;
+    }
+}
+.container{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    align-content: center;
+    flex-direction: column;
+    width: 80%;
+    .artical-container{
+        padding: 50px;
+        display: flex;
+        box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.13);
+        flex-direction: row;
+        margin-bottom: 50px;
+        background-color: $color-secondary;
+        border-radius: 1em;
+        color: white;
+        img{
+            margin-right: 30px;
+            width: 20%;
+            height: auto;
+        }
+        .artical-info{
+            display: flex;
+            flex-direction: column;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (min-width: 772px) {
+    .navbar{
+        i{
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar{
+        flex-direction: row;
+        align-items: center;
+        height: 50px;
+        i {
+            z-index: 6;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+        .logo{
+            z-index: 6;
+            margin-top:15px;
+            justify-self: flex-start !important;
+            margin-left: 20px;
+            img{
+                height: 30px !important;
+            }
+        }
+        .nav-list {
+            z-index: 0 !important;
+            position: fixed;
+            top:50px;
+            left: 0;
+            width: 100vw;
+            height: fit-content;
+            overflow-x: hidden;
+            padding-bottom: 30px;
+            background-color: $color-primary;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            li {
+                margin-top: 20px;
+                a {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                    text-decoration: none;
+                    &:hover {
+                        color: #FFC107;
+                    }
+                }
+            }
+        }
+        .show{
+            display: block !important;
+            animation: openMenu 0.5s ease-in-out;
+            animation-fill-mode: forwards;
+        }
+        .closed {
+            display: block !important;
+            animation: closeMenu 0.5s ease-in-out ;
+            animation-fill-mode: forwards;
+        }
+    }
+}
+
+@keyframes openMenu {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes closeMenu {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
