@@ -1,29 +1,28 @@
 {
-  "name": "abodsblog_adminpanel",
+  "name": "my-first-frontity-project",
   "version": "1.0.0",
-  "description": "This is the admin panel where the manegmant of abods blog happens",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "private": true,
+  "description": "Frontity project",
+  "keywords": [
+    "frontity"
+  ],
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
-  "author": "Abdulrahman Sakah",
-  "license": "ISC",
+  "scripts": {
+    "dev": "frontity dev",
+    "build": "frontity build",
+    "serve": "frontity serve"
+  },
+  "prettier": {},
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
-    "console-stamp": "^3.0.3",
-    "dotenv": "^10.0.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-fileupload": "^1.2.1",
-    "express-session": "^1.17.2",
-    "googleapis": "^84.0.0",
-    "multer": "^1.4.2",
-    "mysql2": "^2.3.0",
-    "node-schedule": "^2.0.0",
-    "nodemon": "^2.0.12",
-    "promise-mysql": "^5.0.3",
-    "q": "^1.5.1",
-    "sequelize": "^6.6.5"
-  }
+    "@frontity/core": "^1.14.3",
+    "@frontity/html2react": "^1.7.0",
+    "@frontity/mars-theme": "./packages/mars-theme",
+    "@frontity/tiny-router": "^1.4.4",
+    "@frontity/wp-source": "^1.11.7",
+    "frontity": "^1.17.1",
+    "prismjs": "^1.26.0"
+    }
 }
