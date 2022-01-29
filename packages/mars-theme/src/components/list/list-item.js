@@ -18,7 +18,6 @@ const Item = ({ state, item }) => {
   for (let tag of item.tags) {
     tags.push(state.source.tag[tag].name);
   }
-  console.log(tags);
   return (
     <article style={{
       border: "1px solid #eaeaea",
@@ -41,7 +40,6 @@ const Item = ({ state, item }) => {
       <Link link={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
-      {console.log(item)}
       <div>
         {/* If the post has an author, we render a clickable author text. */}
         {author && (

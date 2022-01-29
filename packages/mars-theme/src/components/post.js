@@ -62,7 +62,6 @@ const Post = ({ state, actions, libraries }) => {
     tags.push(state.source.tag[tag].name);
   }
 
-  console.log(post.tags);
 
   /**
    * Once the post has loaded in the DOM, prefetch both the
