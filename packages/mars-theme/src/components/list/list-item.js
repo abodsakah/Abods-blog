@@ -1,6 +1,7 @@
 import { connect, styled } from "frontity";
 import Link from "../link";
 import FeaturedMedia from "../featured-media";
+import { useReadingTime } from "react-hook-reading-time";
 
 /**
  * Item Component
@@ -14,7 +15,7 @@ const Item = ({ state, item }) => {
   const author = state.source.author[item.author];
   const tags = [];
   const date = new Date(item.date);
-
+  const {text} = useReadingTime(item.content.rendered);
   for (let tag of item.tags) {
     tags.push(state.source.tag[tag]);
   }
@@ -51,7 +52,7 @@ const Item = ({ state, item }) => {
         )}
         <PublishDate>
           {" "}
-          on <b>{date.toDateString()}</b>
+          on <b>{date.toDateString()}</b> | {text}
         </PublishDate>
       </div>
 

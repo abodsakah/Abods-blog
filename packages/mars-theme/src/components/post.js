@@ -24,6 +24,7 @@ import "prismjs/components/"
 import Link from "./link";
 import List from "./list";
 import FeaturedMedia from "./featured-media";
+import { useReadingTime } from "react-hook-reading-time";
 
 /**
  * The Post component that Mars uses to render any kind of "post type", like
@@ -44,7 +45,8 @@ import FeaturedMedia from "./featured-media";
  *
  * @returns The {@link Post} element rendered.
  */
-const Post = ({ state, actions, libraries }) => {
+const Post = ({state, actions, libraries}) => {
+
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
   // Get the data of the post.
@@ -58,12 +60,11 @@ const Post = ({ state, actions, libraries }) => {
   const Html2React = libraries.html2react.Component;
 
   const tags = [];
-  console.log(state.source.tag);
   for (let tag of post.tags) {
     tags.push(state.source.tag[tag]);
   }
 
-
+  const { text } = useReadingTime(post.content.rendered);
   /**
    * Once the post has loaded in the DOM, prefetch both the
    * home posts and the list component so if the user visits
@@ -98,11 +99,11 @@ const Post = ({ state, actions, libraries }) => {
               )}
               <DateWrapper>
                 {" "}
-                on <b>{date.toDateString()}</b>
+                on <b>{date.toDateString()}</b> | {text}
               </DateWrapper>
             </div>
           )}
-        </div>
+      </div>
         {/* Shwo tags */}
         <Tags>
           <p style={{marginRight: '1rem'}}>Tags: </p>

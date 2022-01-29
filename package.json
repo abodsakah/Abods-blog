@@ -24,6 +24,7 @@
     "@frontity/wp-source": "^1.11.7",
     "frontity": "^1.17.1",
     "prismjs": "^1.26.0",
-    "react-cookie-consent": "^7.2.1"
+    "react-cookie-consent": "^7.2.1",
+    "react-hook-reading-time": "^1.0.0"
   }
 }
