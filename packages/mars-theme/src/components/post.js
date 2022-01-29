@@ -142,6 +142,7 @@ const Container = styled.div`
   width: 800px;
   margin: 0;
   padding: 1rem;
+  overflow: hidden;
 `;
 
 const PostImage = styled.div`
