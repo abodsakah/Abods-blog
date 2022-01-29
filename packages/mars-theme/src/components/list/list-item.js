@@ -12,8 +12,13 @@ import FeaturedMedia from "../featured-media";
  */
 const Item = ({ state, item }) => {
   const author = state.source.author[item.author];
+  const tags = [];
   const date = new Date(item.date);
 
+  for (let tag of item.tags) {
+    tags.push(state.source.tag[tag].name);
+  }
+  console.log(tags);
   return (
     <article style={{
       border: "1px solid #eaeaea",
@@ -36,7 +41,7 @@ const Item = ({ state, item }) => {
       <Link link={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
-
+      {console.log(item)}
       <div>
         {/* If the post has an author, we render a clickable author text. */}
         {author && (
@@ -57,7 +62,17 @@ const Item = ({ state, item }) => {
       {item.excerpt && (
         <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
       )}
-      
+      {/* Shwo tags */}
+      <Tags>
+        {tags.length > 0 && tags.map((tag) => {
+          return (
+            <Tag>
+              {tag}
+            </Tag>
+          )
+        })}
+      </Tags>
+
       {/* Read more link */}
       <Link link={item.link} style={{
         textDecoration: "underline",
@@ -95,4 +110,21 @@ const PublishDate = styled.span`
 const Excerpt = styled.div`
   line-height: 1.6em;
   color: rgba(12, 17, 43, 0.8);
+`;
+
+const Tag = styled.span`
+  background-color: #eaeaea;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+`
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 `;

@@ -7,6 +7,8 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 import Style from "./Style";
+import CookieConsent from "react-cookie-consent";
+
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
@@ -64,6 +66,17 @@ const Theme = ({ state }) => {
           <PageError when={data.isError} />
         </Switch>
       </Main>
+      <CookieConsent
+          location="bottom"
+          buttonText="Got it!"
+          cookieName="myAwesomeCookieName2"
+          style={{ background: "#2B373B"}}
+          buttonStyle={{ color: "#fff", backgroundColor: "#1f38c5", fontSize: "24px" }}
+          expires={150}
+        >
+          This website uses cookies to enhance the user experience.{" "}
+      </CookieConsent>
+
 
     </>
   );

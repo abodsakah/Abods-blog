@@ -57,6 +57,13 @@ const Post = ({ state, actions, libraries }) => {
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
 
+  const tags = [];
+  for (let tag of post.tags) {
+    tags.push(state.source.tag[tag].name);
+  }
+
+  console.log(post.tags);
+
   /**
    * Once the post has loaded in the DOM, prefetch both the
    * home posts and the list component so if the user visits
@@ -71,6 +78,8 @@ const Post = ({ state, actions, libraries }) => {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
+
+
   // Load the post, but only if the data is ready.
   return data.isReady ? (
     <Container>
@@ -94,7 +103,17 @@ const Post = ({ state, actions, libraries }) => {
           </div>
         )}
       </div>
-
+      {/* Shwo tags */}
+      <Tags>
+        <p style={{marginRight: '1rem'}}>Tags: </p>
+        {tags.length > 0 && tags.map((tag) => {
+          return (
+            <Tag>
+              {tag}
+            </Tag>
+          )
+        })}
+      </Tags>
       {/* Look at the settings to see if we should include the featured image */}
       <PostImage>
       {state.theme.featured.showOnPost && (
@@ -123,7 +142,7 @@ export default connect(Post);
 const Container = styled.div`
   width: 800px;
   margin: 0;
-  padding: 24px;
+  padding: 1rem;
 `;
 
 const PostImage = styled.div`
@@ -275,4 +294,21 @@ const Content = styled.div`
       margin-right: 24px;
     }
   }
+`;
+
+const Tag = styled.span`
+  background-color: #eaeaea;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+`
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 `;

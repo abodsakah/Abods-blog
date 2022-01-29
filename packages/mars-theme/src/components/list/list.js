@@ -1,7 +1,6 @@
 import { connect, styled, decode } from "frontity";
 import Item from "./list-item";
 import Pagination from "./pagination";
-import TRUNK from 'vanta/dist/vanta.trunk.min.js';
 const List = ({ state }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
@@ -52,7 +51,7 @@ const Main = styled.div`
 const Container = styled.section`
   width: 100%;
   margin: 0;
-  padding: 24px;
+  // padding: 24px;
   list-style: none;
 `;
 
