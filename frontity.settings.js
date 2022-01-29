@@ -2,7 +2,7 @@ const settings = {
   "name": "my-first-frontity-project",
   "state": {
     "frontity": {
-      "url": "http://abodsakka.xyz:8081",
+      "url": "https://abodsblog.000webhostapp.com/",
       "title": "Abod's blog",
       "description": "A look into my brain 🧠"
     }
@@ -33,7 +33,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "http://abodsakka.xyz:8081"
+          "url": "https://abodsblog.000webhostapp.com/"
         }
       }
     },
