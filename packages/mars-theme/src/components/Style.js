@@ -18,7 +18,13 @@ pre[class*="language-"] {
   -ms-hyphens: none;
   hyphens: none;
 }
-
+button.copy-to-clipboard-button{
+	border: none;
+}
+button.copy-to-clipboard-button:hover{
+	background-color: #1f38c5;
+	cursor: pointer;
+}
 pre[class*="language-"]::-moz-selection,
 pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::-moz-selection,
@@ -250,7 +256,8 @@ pre[id].linkable-line-numbers.linkable-line-numbers span.line-numbers-rows > spa
  * http://prismjs.com/plugins/line-numbers/
  */
 .line-numbers.line-numbers .line-numbers-rows {
-  padding: 0rem .5rem 0rem .5rem;
+  padding-left: 0.5em;
+  text-align: center;
   margin-right: 1rem;
   border-right: 1px solid #0b121b;
   background: #0b121b7a;

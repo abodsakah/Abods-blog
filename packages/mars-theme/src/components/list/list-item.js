@@ -16,7 +16,7 @@ const Item = ({ state, item }) => {
   const date = new Date(item.date);
 
   for (let tag of item.tags) {
-    tags.push(state.source.tag[tag].name);
+    tags.push(state.source.tag[tag]);
   }
   return (
     <article style={{
@@ -65,7 +65,7 @@ const Item = ({ state, item }) => {
         {tags.length > 0 && tags.map((tag) => {
           return (
             <Tag>
-              {tag}
+              <a href={tag.link}>{tag.name}</a>
             </Tag>
           )
         })}

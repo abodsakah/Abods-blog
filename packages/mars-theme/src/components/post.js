@@ -58,8 +58,9 @@ const Post = ({ state, actions, libraries }) => {
   const Html2React = libraries.html2react.Component;
 
   const tags = [];
+  console.log(state.source.tag);
   for (let tag of post.tags) {
-    tags.push(state.source.tag[tag].name);
+    tags.push(state.source.tag[tag]);
   }
 
 
@@ -81,62 +82,66 @@ const Post = ({ state, actions, libraries }) => {
 
   // Load the post, but only if the data is ready.
   return data.isReady ? (
-    <Container>
-      <div>
-        <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+      <Container>
+        <div>
+          <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
 
-        {/* Hide author and date on pages */}
-        {!data.isPage && (
-          <div>
-            {author && (
-              <StyledLink link={author.link}>
-                <Author>
-                  By <b>{author.name}</b>
-                </Author>
-              </StyledLink>
-            )}
-            <DateWrapper>
-              {" "}
-              on <b>{date.toDateString()}</b>
-            </DateWrapper>
-          </div>
-        )}
-      </div>
-      {/* Shwo tags */}
-      <Tags>
-        <p style={{marginRight: '1rem'}}>Tags: </p>
-        {tags.length > 0 && tags.map((tag) => {
-          return (
-            <Tag>
-              {tag}
-            </Tag>
-          )
-        })}
-      </Tags>
-      {/* Look at the settings to see if we should include the featured image */}
-      <PostImage>
-      {state.theme.featured.showOnPost && (
-        <FeaturedMedia id={post.featured_media} />
-        )}
-      </PostImage>
+          {/* Hide author and date on pages */}
+          {!data.isPage && (
+            <div>
+              {author && (
+                <StyledLink link={author.link}>
+                  <Author>
+                    By <b>{author.name}</b>
+                  </Author>
+                </StyledLink>
+              )}
+              <DateWrapper>
+                {" "}
+                on <b>{date.toDateString()}</b>
+              </DateWrapper>
+            </div>
+          )}
+        </div>
+        {/* Shwo tags */}
+        <Tags>
+          <p style={{marginRight: '1rem'}}>Tags: </p>
+          {tags.length > 0 && tags.map((tag) => {
+            return (
+              <Tag>
+                <a href={tag.link}>{tag.name}</a>
+              </Tag>
+            )
+          })}
+        </Tags>
+        {/* Look at the settings to see if we should include the featured image */}
+        <PostImage>
+        {state.theme.featured.showOnPost && (
+          <FeaturedMedia id={post.featured_media} />
+          )}
+        </PostImage>
+ 
 
-      {data.isAttachment ? (
-        // If the post is an attachment, just render the description property,
-        // which already contains the thumbnail.
-        <div dangerouslySetInnerHTML={{ __html: post.description.rendered }} />
-      ) : (
-        // Render the content using the Html2React component so the HTML is
-        // processed by the processors we included in the
-        // libraries.html2react.processors array.
-        <Content>
-          <Html2React html={post.content.rendered} />
-        </Content>
-      )}
-    </Container>
+        {data.isAttachment ? (
+          // If the post is an attachment, just render the description property,
+          // which already contains the thumbnail.
+          <div dangerouslySetInnerHTML={{ __html: post.description.rendered }} />
+        ) : (
+          // Render the content using the Html2React component so the HTML is
+          // processed by the processors we included in the
+          // libraries.html2react.processors array.
+          <Content>
+            <Html2React html={post.content.rendered} />
+          </Content>
+        )}
+      </Container>
+
   ) : null;
 };
 
 export default connect(Post);
+
+const TableOfContent = styled.div``
 
 const Container = styled.div`
   width: 800px;
