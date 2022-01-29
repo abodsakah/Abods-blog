@@ -28,6 +28,23 @@ const Theme = ({ state }) => {
       <Title />
       <Head>
         <meta name="description" content={state.frontity.description} />
+        {/* <!-- Primary Meta Tags --> */}
+        <meta name="title" content="Abod's Blog"/>
+        <meta name="description" content="A look into my brain 🧠"/>
+
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://blog.abodsakka.xyz/"/>
+        <meta property="og:title" content="Abod's Blog"/>
+        <meta property="og:description" content="A look into my brain 🧠"/>
+        <meta property="og:image" content="https://abodsblog.000webhostapp.com/wp-content/uploads/2022/01/Frame-1-8.png"/>
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image"/>
+        <meta property="twitter:url" content="https://blog.abodsakka.xyz/"/>
+        <meta property="twitter:title" content="Abod's Blog"/>
+        <meta property="twitter:description" content="A look into my brain 🧠"/>
+        <meta property="twitter:image" content="https://abodsblog.000webhostapp.com/wp-content/uploads/2022/01/Frame-1-8.png"></meta>
         <html lang="en" />
         <style>
           {Style}
